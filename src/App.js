@@ -1,23 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { Routes, Route, Outlet, NavLink } from "react-router-dom";
+
+function Login() {
+  return <p>Login</p>;
+}
+
+function Contact() {
+  return <p>Contact</p>;
+}
+
+function Services() {
+
+  return (
+    <div>
+      <p>Services</p>
+      <Outlet />
+    </div>
+  )
+}
+
+function ServicesWeb() {
+  return <p>Services - web</p>;
+}
+
+function ServicesServer() {
+  return <p>Services - server</p>;
+}
+
+console.log("Application is starting : D");
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Hello</h1>
+
+      <nav>
+        <NavLink to="login">Login</NavLink> {" --- "}
+        <NavLink to="contact">Contact</NavLink> {" --- "}
+        <NavLink to="services">Services</NavLink> {" --- "}
+        <NavLink to="services/web">WEB</NavLink> {" --- "}
+        <NavLink to="services/server">SERVER</NavLink> {" --- "}
+
+
+
+        
+      </nav>
+
+      <Routes>
+        <Route path="login" element={<Login />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="services">
+          <Route index element={ <Services /> }/>
+          <Route path="web" element={<ServicesWeb />} />
+          <Route path="server" element={<ServicesServer />} />
+        </Route>
+      </Routes>
     </div>
   );
 }
